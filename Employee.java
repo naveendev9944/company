@@ -4,16 +4,22 @@ class Responsibility{
 	Responsibility(String responsibility){
 		this.responsibility=responsibility;
 	}
-        public boolean equals(Object o) {  
-      		if (o == this) {  
+	@Override
+        public boolean equals(Object o) {
+      		if (o==this) {	
         		return true;  
        		 }  
-      		if (!(o instanceof Responsibility)) {  
-        		return false;  
-     		 } 
-     		 Responsibility s = (Responsibility) o;  
-     		 return responsibility.equals(s.responsibility);  
-  	 }  	
+
+		if (o==null||this.getClass()== o.getClass()){ 
+			return false;
+		}
+        	return this.responsibility.equals(o);
+  	 }  
+	@Override
+	public int hashCode() {
+        	return 0;
+    }
+	
 }
 interface Role{
 	Set<Responsibility> getResponsibilities();
@@ -26,7 +32,7 @@ class Manager implements Role{
 	 	responsibility.add(new Responsibility("fire"));
 		responsibility.add(new Responsibility("appraisal"));
 	}
-	
+	@Override
 	public Set<Responsibility> getResponsibilities(){
 		return this.responsibility;
 	}
@@ -41,7 +47,7 @@ class Trainer implements Role{
 		responsibility.add(new Responsibility("debug"));
 		responsibility.add(new Responsibility("train"));
 	}
-	
+	@Override
 	public Set<Responsibility> getResponsibilities(){
 		return this.responsibility;
 	}
@@ -56,7 +62,7 @@ class Developer implements Role{
 		responsibility.add(new Responsibility("debug"));
 		responsibility.add(new Responsibility("design"));
 	}
-
+	@Override
 	public Set<Responsibility> getResponsibilities(){
 		return this.responsibility;
 	}
@@ -70,6 +76,7 @@ class Lead implements Role{
 		responsibility.add(new Responsibility("debug"));
 		responsibility.add(new Responsibility("design"));
 	}
+	@Override
 	public Set<Responsibility> getResponsibilities(){
 		return this.responsibility;
 	}
@@ -133,13 +140,13 @@ class Company{
 				for(Responsibility resp:role.getResponsibilities()){
 					if(resp.equals(responsibility)){
 						System.out.println(employee.getName());
-						System.out.println(responsibility);
+						i=1;
 						break;
 					}		
 				}
-			}
 				if(i==1)
-					break;
+                                        break;
+			}
 			
 		}
 	}

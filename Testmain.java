@@ -42,7 +42,6 @@ public class Testmain {
                                			ob.addRole(objl);
                        			 }
                        		}
-				System.out.println("\nRole was added successfully\n");
 				cmp.addEmployee(ob);
 				System.out.println(name+" was added as an employee\n");
 	     			break;
@@ -51,6 +50,10 @@ public class Testmain {
 				System.out.println("Enter the employee name");
 				String name=sc.nextLine();
 	 		 	Employee ob=cmp.getEmployee(name);
+	 		 	 if(ob==null){
+					System.out.println("Employee doesn't exist");
+					break;
+				}
 				System.out.println("Enter the role to be add\n1.Manager\n2.Trainer\n3.Developer\n4.Lead");
 				int role=sc.nextInt();
                                 sc.nextLine();
@@ -72,7 +75,6 @@ public class Testmain {
                                                 ob.addRole(objl);
                                          }
 				}
-				System.out.println("\nRole was added successfully\n");
 	     			break;
 	    		}
 
@@ -80,6 +82,10 @@ public class Testmain {
 				System.out.println("Enter the employee name");
                                 String name=sc.nextLine();
                                 Employee ob=cmp.getEmployee(name);
+                                if(ob==null){
+					System.out.println("Employee doesn't exist");
+					break;
+				}
                                 System.out.println("Enter the role to be remove\n1.Manager\n2.Trainer\n3.Developer\n4.Lead");
                                 int role=sc.nextInt();
                                 sc.nextLine();
@@ -105,8 +111,8 @@ public class Testmain {
 	      			break;
 	    		}
 	    		case 4:{
-				System.out.prinln("Employees in the organaization");
-				emp.showEmployee();
+				System.out.println("Employees in the organaization");
+				cmp.showEmployee();
 	      			break;
 	    		}
 	    		case 5:{
