@@ -17,7 +17,7 @@ class Responsibility{
   	 }  
 	@Override
 	public int hashCode() {
-        	return 0;
+        	 return Objects.hash(responsibility);
     }
 	
 }
@@ -34,7 +34,7 @@ class Manager implements Role{
 	}
 	@Override
 	public Set<Responsibility> getResponsibilities(){
-		return this.responsibility;
+		return responsibility;
 	}
 }
 
@@ -49,7 +49,7 @@ class Trainer implements Role{
 	}
 	@Override
 	public Set<Responsibility> getResponsibilities(){
-		return this.responsibility;
+		return responsibility;
 	}
 }
 
@@ -64,7 +64,7 @@ class Developer implements Role{
 	}
 	@Override
 	public Set<Responsibility> getResponsibilities(){
-		return this.responsibility;
+		return responsibility;
 	}
 }
 								//Lead
@@ -78,41 +78,33 @@ class Lead implements Role{
 	}
 	@Override
 	public Set<Responsibility> getResponsibilities(){
-		return this.responsibility;
+		return responsibility;
 	}
 }
 
 class Employee{
     private String name;
-    private int age;
+    private byte age;
     private Set<Role> roles = new HashSet<>();
 
-    public Employee(String name, int age) {
+    public Employee(String name, byte age) {
         this.name = name;
         this.age = age;
     }
 
     public void addRole(Role role) {
-        for(Role r:roles){
-                if(r.equals(role)){
-                        System.out.println("\nRole already exixst\n");
-                        return;
-                }
-        }
-	roles.add(role);
-        System.out.println("\nRole added successfully\n");
+	if(roles.add(role))
+        	System.out.println("\nRole added successfully\n");
+        else
+		System.out.println("\nRole already exist\n");
 
     }
 
     public void removeRole(Role role) {
-	for(Role r:roles){
-		if(r.equals(role)){
-			roles.remove(role);
-			System.out.println("\nRole removed successfuul\n");
-			return;
-		}
-	}
-	System.out.println("\nThis Role is not exist for this employee\n");
+		if(roles.remove(role))
+			System.out.println("\nRole removed successfully\n");
+		else
+			System.out.println("\nRole doesn't exist\n");
     }
 
     public Set<Role> getRoles() {
@@ -129,6 +121,12 @@ class Employee{
 
 }
 class Company{
+	String name;
+	String address;
+	Company(String name,String address){
+		this.name=name;
+		this.address=address;
+	}
 	private List<Employee> employees=new ArrayList<>();
 	public void addEmployee(Employee e) {
 		employees.add(e);
@@ -160,6 +158,21 @@ class Company{
 		for(Employee employee :employees){
 			if(employee.getName().equals(name))
 				return employee;
+		}
+		return null;
+	}
+}
+class Companies{
+	private List<Company> allcompanies=new ArrayList<>();
+	public void addCompany(Company c) {
+		allcompanies.add(c);
+	}
+	
+	
+	public Company getCompany(String name){
+		for(Company company :allcompanies){
+			if(company.name.equals(name))
+				return company;
 		}
 		return null;
 	}
